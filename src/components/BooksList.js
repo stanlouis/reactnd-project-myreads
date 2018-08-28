@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
+import AppTitle from './AppTitle'
 import { Link } from 'react-router-dom';
 
 export default class BooksList extends Component {
   render() {
     return (
       <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
+            <AppTitle title="MyReads" />
+            
             <div className="list-books-content">
               <div>
                 <div className="bookshelf">
