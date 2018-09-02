@@ -20,6 +20,7 @@ export default class BooksList extends Component {
                 selectBooks={this.props.books.filter(
                   book => book.shelf === 'currentlyReading'
                 )}
+                onShelfChange={this.props.onShelfChange}
               />
             </div>
             <div className="bookshelf">
@@ -29,6 +30,7 @@ export default class BooksList extends Component {
                 selectBooks={this.props.books.filter(
                   book => book.shelf === 'wantToRead'
                 )}
+                onShelfChange={this.props.onShelfChange}
               />
             </div>
             <div className="bookshelf">
@@ -38,6 +40,7 @@ export default class BooksList extends Component {
                 selectBooks={this.props.books.filter(
                   book => book.shelf === 'read'
                 )}
+                onShelfChange={this.props.onShelfChange}
               />
             </div>
           </div>

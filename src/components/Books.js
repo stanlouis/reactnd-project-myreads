@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Books = ({ booksList }) => {
+const Books = ({ booksList, onShelfChange }) => {
   return booksList.map(book => {
     return (
       <li key={book.id}>
@@ -15,7 +15,7 @@ const Books = ({ booksList }) => {
               }}
             />
             <div className="book-shelf-changer">
-              <select>
+              <select onChange={e => onShelfChange(book, e.target.value)} value={book.shelf}>
                 <option value="move" disabled>
                   Move to...
                 </option>

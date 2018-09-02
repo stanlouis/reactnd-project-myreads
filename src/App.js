@@ -18,13 +18,35 @@ class BooksApp extends React.Component {
     });
   };
 
+  handleShelfUpdate = (book, shelf) => {
+    // console.log(book.id)
+    BooksAPI.update(book, shelf).then(response => {
+      this.setState(prevState => {
+        let selectedBook = prevState.books.filter(
+          bookPrevState => bookPrevState.id === book.id
+        );
+        // console.log(book, selectedBook);
+        
+        selectedBook[0].shelf = shelf;
+        return {
+          books: prevState.books
+        }
+      });
+    });
+  };
+
   render() {
     return (
       <div className="app">
         <Route
           exact
           path="/"
-          render={() => <BooksList books={this.state.books} />}
+          render={() => (
+            <BooksList
+              books={this.state.books}
+              onShelfChange={this.handleShelfUpdate}
+            />
+          )}
         />
         <Route
           path="/search"
