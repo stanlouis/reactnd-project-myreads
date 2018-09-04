@@ -11,11 +11,17 @@ const Books = ({ booksList, onShelfChange }) => {
               style={{
                 width: 128,
                 height: 193,
-                backgroundImage: `url(${book.imageLinks.thumbnail})`
+                backgroundImage:
+                  book.imageLinks && book.imageLinks.thumbnail
+                    ? `url(${book.imageLinks.thumbnail})`
+                    : `url(noCover)`
               }}
             />
             <div className="book-shelf-changer">
-              <select onChange={e => onShelfChange(book, e.target.value)} value={book.shelf}>
+              <select
+                onChange={e => onShelfChange(book, e.target.value)}
+                value={book.shelf}
+              >
                 <option value="move" disabled>
                   Move to...
                 </option>

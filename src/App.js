@@ -19,18 +19,16 @@ class BooksApp extends React.Component {
   };
 
   handleShelfUpdate = (book, shelf) => {
-    // console.log(book.id)
-    BooksAPI.update(book, shelf).then(response => {
+    BooksAPI.update(book, shelf).then(() => {
       this.setState(prevState => {
-        let selectedBook = prevState.books.filter(
-          bookPrevState => bookPrevState.id === book.id
+        let nonSelectedBooks = prevState.books.filter(
+          bookPrevState => bookPrevState.id !== book.id
         );
-        // console.log(book, selectedBook);
-        
-        selectedBook[0].shelf = shelf;
+        book.shelf = shelf;
+        nonSelectedBooks.push(book);
         return {
-          books: prevState.books
-        }
+          books: nonSelectedBooks
+        };
       });
     });
   };
@@ -50,7 +48,12 @@ class BooksApp extends React.Component {
         />
         <Route
           path="/search"
-          render={() => <BookSearch books={this.state.books} />}
+          render={() => (
+            <BookSearch
+              books={this.state.books}
+              onShelfChange={this.handleShelfUpdate}
+            />
+          )}
         />
       </div>
     );
