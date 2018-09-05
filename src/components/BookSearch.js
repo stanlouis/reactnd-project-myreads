@@ -39,6 +39,18 @@ export default class BookSearch extends Component {
     }
   };
   render() {
+    const shelvedBooks = this.props.books;
+    const booksResultWithShelf = this.state.books.map(book => {
+      // Find shelved books in the search result
+      let duplicateBooks = shelvedBooks.filter(
+        shelvedBook => shelvedBook.id === book.id
+      );
+      // Match Shelf value
+      if (duplicateBooks.length > 0) {
+        book.shelf = duplicateBooks[0].shelf;
+      }
+      return book;
+    });
     return (
       <div>
         <div className="search-books">
@@ -66,7 +78,7 @@ export default class BookSearch extends Component {
             {this.state.books.length > 0 && (
               <ol className="books-grid">
                 <Books
-                  booksList={this.state.books}
+                  booksList={booksResultWithShelf}
                   onShelfChange={this.props.onShelfChange}
                 />
               </ol>
